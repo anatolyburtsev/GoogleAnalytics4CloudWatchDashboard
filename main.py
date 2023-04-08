@@ -1,8 +1,11 @@
 from google.oauth2 import service_account
 from googleapiclient.discovery import build
 import json
+from datetime import datetime, timedelta
+from dateutil.relativedelta import relativedelta
 
-# Replace with the path to your JSON key file
+from libs.utils import ga_report_to_html_graph
+
 KEY_FILE_PATH = 'gcp_key.json'
 
 PROPERTY_ID = "363855928"
@@ -14,9 +17,10 @@ credentials = service_account.Credentials.from_service_account_file(
 # Initialize the Analytics Data API client
 analytics = build('analyticsdata', 'v1beta', credentials=credentials)
 
+start_date = (datetime.now() - relativedelta(months=3)).strftime('%Y-%m-%d')
 # Define the request
 request_body = {
-    'date_ranges': [{'start_date': '7daysAgo', 'end_date': 'today'}],
+    'date_ranges': [{'start_date': start_date, 'end_date': 'today'}],
     'dimensions': [{'name': 'date'}],
     'metrics': [{'name': 'activeUsers'}, {'name': 'screenPageViews'}],
 }
@@ -24,5 +28,5 @@ request_body = {
 # Make the request
 response = analytics.properties().runReport(property=f'properties/{PROPERTY_ID}', body=request_body).execute()
 
-# Print the response
+ga_report_to_html_graph(response)
 print(json.dumps(response, indent=2))
