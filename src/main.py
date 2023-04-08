@@ -1,12 +1,12 @@
 from google.oauth2 import service_account
 from googleapiclient.discovery import build
 import json
-from datetime import datetime, timedelta
+from datetime import datetime
 from dateutil.relativedelta import relativedelta
 
 from libs.utils import ga_report_to_html_graph
 
-KEY_FILE_PATH = 'gcp_key.json'
+KEY_FILE_PATH = '../gcp_key.json'
 
 PROPERTY_ID = "363855928"
 
