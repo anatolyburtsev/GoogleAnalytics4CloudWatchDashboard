@@ -1,17 +1,15 @@
 # Description
-Toy project to get data from google analytics and return it as html table to show it in custom CloudWatch widget. 
+App gets data from google analytics V4 and shows it in custom AWS CloudWatch widget. 
 
 Note: Custom CloudWatch widget doesn't allow any js code, so it's not a graph, but table
-
-GA credentials are stored in AWS SecretsManager (hardcoded). 
 
 ![pic](./docs/CWdashboardScreenshot.png)
 
 [Report example](./docs/html_report_example.html)
 
 ## Prerequisites
-- website with installed google analytics V4 property
-- credentials for Service account in GCP, which has access to Google Analytics property (See Appendix A for dtails)
+- website with installed Google Analytics V4 property
+- credentials for Service account in GCP, which has access to Google Analytics property (See Appendix A for details)
 - credentials(json key) are store in AWS Secrets Manager. Secret name hardcoded in `src/index.py`
 
 ## Setup
@@ -22,8 +20,9 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-Synthesize the CloudFormation template for this code.
+Install and run Docker
 
+Synthesize the CloudFormation template for this code.
 ```
 cdk synth
 ```
