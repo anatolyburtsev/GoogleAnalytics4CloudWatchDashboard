@@ -5,15 +5,12 @@ from aws_cdk import (
 )
 from constructs import Construct
 
+from iac.analytics_lambda_stack import AnalyticsLambdaStack
+
+
 class IacStack(Stack):
 
     def __init__(self, scope: Construct, construct_id: str, **kwargs) -> None:
         super().__init__(scope, construct_id, **kwargs)
 
-        # The code that defines your stack goes here
-
-        # example resource
-        # queue = sqs.Queue(
-        #     self, "IacQueue",
-        #     visibility_timeout=Duration.seconds(300),
-        # )
+        lambda_stack = AnalyticsLambdaStack(self, "analytics_lambda_stack")
