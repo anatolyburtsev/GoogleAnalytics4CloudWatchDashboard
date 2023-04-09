@@ -6,6 +6,7 @@ from aws_cdk import (
 from constructs import Construct
 
 from iac.analytics_lambda_stack import AnalyticsLambdaStack
+from iac.dashboard_stack import DashboardStack
 
 
 class IacStack(Stack):
@@ -14,3 +15,5 @@ class IacStack(Stack):
         super().__init__(scope, construct_id, **kwargs)
 
         lambda_stack = AnalyticsLambdaStack(self, "analytics_lambda_stack")
+
+        dashboard_stack = DashboardStack(self, "dashboard_stack", lambda_stack.ga_lambda)

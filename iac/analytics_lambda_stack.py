@@ -15,7 +15,7 @@ class AnalyticsLambdaStack(Stack):
         # Retrieve the GCP credentials secret
         gcp_credentials_secret = sm.Secret.from_secret_name_v2(self, "GCPCredentialsSecret", "hello_ga_secret_key")
 
-        ga_lambda = _lambda.DockerImageFunction(
+        self.ga_lambda = _lambda.DockerImageFunction(
             self, "ga_hello_world",
             function_name="GA_hello_world",
             code=_lambda.DockerImageCode.from_image_asset(
@@ -27,4 +27,6 @@ class AnalyticsLambdaStack(Stack):
         )
 
         # Grant read permission for the secret to the Lambda function
-        gcp_credentials_secret.grant_read(ga_lambda)
+        gcp_credentials_secret.grant_read(self.ga_lambda)
+
+        self.ga_lambda.function_arn
